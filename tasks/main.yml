@@ -11,7 +11,8 @@
 - name: Make sure exports paths are present
   become: yes
   file:
-    state: "{{ item.path }}"
+    path: "{{ item.path }}"
+    state: directory
     mode: 0777
   with_items: "{{ nfs.exports }}" 
   
