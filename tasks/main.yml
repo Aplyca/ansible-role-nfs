@@ -1,0 +1,16 @@
+---
+- name: Ensure NFS packages are present using apt
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - nfs-kernel-server
+    - nfs-common
+    
+- name: Copy exports file
+  become: yes
+  template:
+    src: exports.j2
+    dest: /etc/exports
+  notify: restart nfs-kernel-server    
