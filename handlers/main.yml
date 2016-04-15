@@ -5,4 +5,7 @@
     name: nfs-kernel-server
     state: restarted
     enabled: yes
-
+    
+- name: export exportfs
+  become: yes
+  shell: "exportfs -ra"

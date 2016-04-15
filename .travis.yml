@@ -4,15 +4,11 @@ python: "2.7"
 
 before_install:
   - sudo apt-get update -qq
-  - ln -s ansible-role-nginx ../Aplyca.Nginx
+  - ln -s ansible-role-nfs ../Aplyca.NFS
 
 install:
   # Install Ansible.
   - sudo pip install -r tests/requirements.txt
-
-addons:
-  hosts:
-    - myapp.com
 
 script:
   - tests/tests.sh

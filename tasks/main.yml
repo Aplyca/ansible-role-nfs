@@ -8,9 +8,20 @@
     - nfs-kernel-server
     - nfs-common
     
+- name: Make sure exports paths are present
+  become: yes
+  file:
+    state: "{{ item.path }}"
+    mode: 0777
+  with_items: "{{ nfs.exports }}" 
+  
 - name: Copy exports file
   become: yes
   template:
     src: exports.j2
     dest: /etc/exports
-  notify: restart nfs-kernel-server    
+  notify: 
+    - export exportfs 
+    - restart nfs-kernel-server  
+
+ 
